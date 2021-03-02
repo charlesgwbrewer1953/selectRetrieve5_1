@@ -193,9 +193,7 @@ shinyServer(function(input, output) {
     })   # Retrieves records between dates. This is the only database retrieval. Other selections are done from this
 
     query_out_Date_proc <- query_out_Date
-    print("Here!")
     query_out_List <- reactive({rssSelection(query_out_Date, input$isource, input$iorientation, input$icountry, input$iTextinput)
-      print("herre")
       }) # Filter on input$
 
     ##############
@@ -217,7 +215,7 @@ shinyServer(function(input, output) {
     output$SA_summary_by_period <-renderPlot({
       print("SA_s_b_P")
 #      totVals1 <- filter(totVals(), factorName %in% input$iSentimentFactor )
-      q <- ggplot(totVals(), aes(x = Factor, y = Value))+
+      q <- ggplot(totVals(), aes(x = reorder(Factor, Value), y = Value))+
         theme(axis.text.x = element_text(angle = 90))+
         ggtitle("Period analysis / Sentiment") +
         geom_bar(stat = "identity")

@@ -1,0 +1,12 @@
+name: selectRetrieve5_1
+title: selectRetrieve5_1
+username:
+account: hyperplane
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3721622
+bundleId: 4290690
+url: https://hyperplane.shinyapps.io/selectRetrieve5_1/
+when: 1614696098.08488
+asMultiple: FALSE
+asStatic: FALSE
