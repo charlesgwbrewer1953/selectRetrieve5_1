@@ -19,7 +19,7 @@ library(pool)
 library(tidyverse)
 library(DBI)
 library(zoo)
-library(shinysky)
+# library(shinysky)
 library(reshape2)
 library(shinythemes)
 

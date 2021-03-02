@@ -1,6 +1,6 @@
 library(readxl)
 library(tidyverse)
-function_dev <- read_excel("OneDrive/Development/metis_dev2/selectRetrieve5/function_dev.xlsx") # Selectd data
+function_dev <- read_excel("function_dev.xlsx") # Selectd data
 function_dev$act_date <- as.Date(str_sub(function_dev$item_date_published, 1, 10)) # Reduce date to YYYY-MM-DD
 
 ################## Functional code starts here

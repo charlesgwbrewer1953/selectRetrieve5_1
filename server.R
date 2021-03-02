@@ -28,9 +28,10 @@ shinyServer(function(input, output) {
   # Normal Functions
 
     rssSelection <- function(rssSelected,  Source, Orientation, Country, Topic){
-
+      ifelse(is.null(Source), rssSelected <- rssSelected,
+             rssSelected <- filter(rssSelected, Source == ext_name))
         ifelse(is.null(Orientation), rssSelected <- rssSelected,
-               rssSelected <- filter(rssSelected, Orientation == orientation))
+               rssSelected <- filter(rssSelected, orientation %in% Orientation))
         ifelse(is.null(Country), rssSelected <- rssSelected,
                rssSelected <- filter(rssSelected, Country  == country))
         ifelse(is.null(Topic), rssSelected <- rssSelected,
@@ -54,7 +55,7 @@ shinyServer(function(input, output) {
 # Reactive functions
 # sumvals - sums values by selected
     sumVals <-  reactive({
-      query_in <- rssSelection(query_out_Date(), input$isource, input$orientation, input$icountry, input$iTextinput)
+      query_in <- rssSelection(query_out_Date(), input$isource, input$iorientation, input$icountry, input$iTextinput)
       sumVals <- query_in %>%
       group_by(item_date_published) %>%
       summarize(
@@ -89,7 +90,7 @@ shinyServer(function(input, output) {
 
 #totVals - sums values for total period for each SA factor
     totVals <- reactive({
-      query_in <- rssSelection(query_out_Date(), input$isource, input$orientation, input$icountry, input$iTextinput)
+      query_in <- rssSelection(query_out_Date(), input$isource, input$iorientation, input$icountry, input$iTextinput)
       totVals <- query_in %>% gather(syuzhet_score, afinn_score, bing_score,
                                                               nrc_score_anger, nrc_score_anticipation, nrc_score_disgust, nrc_score_fear,
                                                               nrc_score_joy, nrc_score_positive, nrc_score_negative,
@@ -193,7 +194,7 @@ shinyServer(function(input, output) {
 
     query_out_Date_proc <- query_out_Date
     print("Here!")
-    query_out_List <- reactive({rssSelection(query_out_Date, input$isource, input$orientation, input$icountry, input$iTextinput)
+    query_out_List <- reactive({rssSelection(query_out_Date, input$isource, input$iorientation, input$icountry, input$iTextinput)
       print("herre")
       }) # Filter on input$
 
