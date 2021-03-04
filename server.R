@@ -35,10 +35,8 @@ shinyServer(function(input, output) {
         ifelse(is.null(Country), rssSelected <- rssSelected,
                rssSelected <- filter(rssSelected, Country  == country))
         ifelse(is.null(Topic), rssSelected <- rssSelected,
-               rssSelected<- dplyr::filter(rssSelected, str_detect(rssSelected[,"item_title"], regex(Topic, ignore_case = TRUE))))
-        return(rssSelected)
+               rssSelected)
     }
-
 
     posneg <- function(SA_scores){
         neg <- -sum(SA_scores[SA_scores <0])
